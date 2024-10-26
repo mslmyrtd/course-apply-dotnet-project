@@ -1,6 +1,7 @@
+using course_apply_dotnet_project.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace course_apply_dotnet_project
+namespace course_apply_dotnet_project.Controllers
 {
     public class CourseController :Controller
     {
@@ -11,6 +12,13 @@ namespace course_apply_dotnet_project
         public IActionResult Apply()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+         public IActionResult Apply([FromForm] Candidate model)
+        {
+            Repository.Add(model);
+            return Redirect("/");
         }
     }
 }
