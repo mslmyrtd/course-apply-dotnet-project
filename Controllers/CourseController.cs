@@ -7,7 +7,8 @@ namespace course_apply_dotnet_project.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model=Repository.Applications;
+            return View(model);
         }
         public IActionResult Apply()
         {
@@ -18,7 +19,7 @@ namespace course_apply_dotnet_project.Controllers
          public IActionResult Apply([FromForm] Candidate model)
         {
             Repository.Add(model);
-            return Redirect("/");
+            return View("Feedback", model);
         }
     }
 }
